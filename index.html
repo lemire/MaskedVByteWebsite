@@ -1,0 +1,31 @@
+<html>
+<body style="width:15cm;margin-left:auto;margin-right:auto;">
+<h1>MaskedVByte: SIMD-accelerated VByte</h1>
+
+<p>
+We consider the ubiquitous technique of VByte compression, which represents each integer as a variable length sequence of bytes. The low 7 bits of each byte encode a portion of the integer, and the high bit of each byte is reserved as a continuation flag.  This flag is set to 1 for all bytes except the last, and the decoding of each integer is complete when a byte with a high bit of 0 is encountered.  VByte decoding can be a performance bottleneck especially when the unpredictable lengths of the encoded integers cause frequent branch mispredictions.  Previous attempts to accelerate VByte decoding using SIMD vector instructions have been disappointing, prodding search engines such as Google to use more complicated but faster-to-decode formats for performance-critical code. Our decoder (Masked VByte) is 2 to 4 times faster than a conventional scalar VByte decoder, making the format once again competitive with regard to speed.
+</p>
+<img src="maskedvbyte.png" />
+
+<h2>Paper</h2>
+<p>Jeff Plaisance, Nathan Kurz, Daniel Lemire, <a href="http://arxiv.org/abs/1503.07387">Vectorized VByte Decoding</a>,
+International Symposium on Web Algorithms 2015, 2015. (<a href="http://arxiv.org/pdf/1503.07387.pdf">PDF</a>, <a href="https://docs.google.com/presentation/d/1hH10-JDrVxYl3Ep5LIJ75auS90UbBugDqRiAdvBO7Po/">slides</a>)
+</p>
+
+
+<h2>C/C++ Software</h2>
+<p>
+We have produced a <a href="https://github.com/lemire/MaskedVByte">dedicated C library</a> to promote Masked VByte.
+</p>
+
+
+<p>
+MaskedVByte was initially developped by Indeed for <a href="http://indeedeng.github.io/imhotep/">Imhotep</a>. We also used a <a href="https://github.com/lemire/SIMDCompressionAndIntersection/blob/master/src/varintdecode.c">C++ library for benchmarking purposes</a>.
+</p>
+
+
+
+
+</body>
+</html>
+
